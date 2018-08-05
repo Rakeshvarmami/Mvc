@@ -301,15 +301,53 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var propertyEntry = new DefaultMetadataDetails(propertyKey, attributes);
             if (propertyHelper.Property.CanRead && propertyHelper.Property.GetMethod?.IsPublic == true)
             {
+#if NETSTANDARD2_0
                 var getter = PropertyHelper.MakeNullSafeFastPropertyGetter(propertyHelper.Property);
                 propertyEntry.PropertyGetter = getter;
+#else
+                var methodInfo = propertyHelper.Property.GetMethod;
+                propertyEntry.PropertyGetter = (obj) =>
+                {
+                    return methodInfo.Invoke(obj, Array.Empty<object>());
+                };
+
+                //propertyEntry.PropertyGetter = (obj) =>
+                //{
+                //    var reciever = TypedReference.Create(ref obj, propertyKey.ContainerType);
+
+                //    object result = null;
+                //    var @return = TypedReference.Create(ref result, propertyHelper.Property.PropertyType);
+                //    methodInfo.Invoke2(@return, reciever);
+                //    return result;
+                //};
+#endif
             }
 
             if (propertyHelper.Property.CanWrite &&
                 propertyHelper.Property.SetMethod?.IsPublic == true &&
                 !containerType.IsValueType)
             {
+#if NETSTANDARD2_0
                 propertyEntry.PropertySetter = propertyHelper.ValueSetter;
+#else
+                var methodInfo = propertyHelper.Property.SetMethod;
+                propertyEntry.PropertySetter = (obj, value) =>
+                {
+                    methodInfo.Invoke(obj, new[] { value, });
+                };
+
+                //ConstructorInfo ci;
+                //MethodBase b;
+                //propertyEntry.PropertySetter = (obj, value) =>
+                //{
+                //    var reciever = TypedReference.Create(ref obj, propertyKey.ContainerType);
+                //    var param = TypedReference.Create(ref value, propertyHelper.Property.PropertyType);
+
+                //    object result = null;
+                //    var @return = TypedReference.Create(ref result, propertyHelper.Property.PropertyType);
+                //    methodInfo.Invoke2(@return, reciever, param);
+                //};
+#endif
             }
 
             return propertyEntry;
