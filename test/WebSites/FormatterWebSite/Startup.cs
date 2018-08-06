@@ -18,7 +18,7 @@ namespace FormatterWebSite
                 options.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(Supplier)));
 
                 options.InputFormatters.Add(new StringInputFormatter());
-                options.EnableGlobalRouting = true;
+                options.EnableEndpointRouting = true;
             })
             .AddXmlDataContractSerializerFormatters();
 

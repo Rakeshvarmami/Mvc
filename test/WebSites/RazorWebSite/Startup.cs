@@ -23,7 +23,7 @@ namespace RazorWebSite
             services.AddSingleton<ITagHelperComponent, TestBodyTagHelperComponent>();
 
             services
-                .AddMvc(options => options.EnableGlobalRouting = true)
+                .AddMvc(options => options.EnableEndpointRouting = true)
                 .AddRazorOptions(options =>
                 {
                     options.FileProviders.Add(new EmbeddedFileProvider(

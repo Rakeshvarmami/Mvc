@@ -17,7 +17,7 @@ namespace XmlFormattersWebSite
         public void ConfigureServices(IServiceCollection services)
         {
             // Add MVC services to the services container
-            services.AddMvc(options => options.EnableGlobalRouting = true);
+            services.AddMvc(options => options.EnableEndpointRouting = true);
 
             services.Configure<MvcOptions>(options =>
             {

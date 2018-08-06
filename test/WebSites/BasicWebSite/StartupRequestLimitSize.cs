@@ -13,7 +13,7 @@ namespace BasicWebSite
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => options.EnableGlobalRouting = true);
+            services.AddMvc(options => options.EnableEndpointRouting = true);
             services.ConfigureBaseWebSiteAuthPolicies();
         }
 

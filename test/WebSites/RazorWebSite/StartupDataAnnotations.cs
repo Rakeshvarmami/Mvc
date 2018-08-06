@@ -19,7 +19,7 @@ namespace RazorWebSite
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
             services
-                .AddMvc(options => options.EnableGlobalRouting = true)
+                .AddMvc(options => options.EnableEndpointRouting = true)
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization((options) =>
                 {

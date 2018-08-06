@@ -12,7 +12,7 @@ namespace RazorBuildWebSite
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => options.EnableGlobalRouting = true);
+            services.AddMvc(options => options.EnableEndpointRouting = true);
         }
 
         public void Configure(IApplicationBuilder app)

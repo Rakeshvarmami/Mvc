@@ -14,7 +14,7 @@ namespace SecurityWebSite
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc(options => options.EnableGlobalRouting = true);
+            services.AddMvc(options => options.EnableEndpointRouting = true);
             services.AddAntiforgery();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => 
             {

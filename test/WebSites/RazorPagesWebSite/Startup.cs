@@ -14,7 +14,7 @@ namespace RazorPagesWebSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/Login");
-            services.AddMvc(options => options.EnableGlobalRouting = true)
+            services.AddMvc(options => options.EnableEndpointRouting = true)
                 .AddMvcLocalization()
                 .AddRazorPagesOptions(options =>
                 {

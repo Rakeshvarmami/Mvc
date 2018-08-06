@@ -35,7 +35,7 @@ namespace ApiExplorerWebSite
                 options.OutputFormatters.Add(jsonOutputFormatter);
                 options.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
 
-                options.EnableGlobalRouting = true;
+                options.EnableEndpointRouting = true;
             });
 
             services.AddSingleton<ApiExplorerDataFilter>();
